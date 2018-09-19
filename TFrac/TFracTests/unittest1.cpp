@@ -25,6 +25,18 @@ namespace TFracTests
 			Assert::AreEqual(1.0, test2.getDenom());
 		}
 
+
+		TEST_METHOD(IntABConstructorTest)
+		{
+			TFrac test1(6, 3);
+			TFrac test2(12, 6);
+			Assert::AreEqual(2.0, test2.getNumer());
+			Assert::AreEqual(1.0, test2.getDenom());
+			Assert::AreEqual(2.0, test1.getNumer());
+			Assert::AreEqual(1.0, test1.getDenom());
+		}
+
+
 		TEST_METHOD(StringConstructorTest03)
 		{
 			TFrac test1("0/3");
@@ -39,6 +51,18 @@ namespace TFracTests
 			Assert::AreEqual(2.0, test2.getNumer());
 			Assert::AreEqual(1.0, test2.getDenom());
 		}
+
+
+		TEST_METHOD(StringConstructorTestWrong)
+		{
+			TFrac test1("ds678f/s546/*--dg789");
+			Assert::AreEqual(0.0, test1.getNumer());
+			Assert::AreEqual(1.0, test1.getDenom());
+			TFrac test2("d");
+			Assert::AreEqual(0.0, test1.getNumer());
+			Assert::AreEqual(1.0, test1.getDenom());
+		}
+
 
 		TEST_METHOD(CopyTest)
 		{
@@ -79,11 +103,22 @@ namespace TFracTests
 
 		TEST_METHOD(DivTest)
 		{
-			TFrac testFst(2, 3);
-			TFrac testSnd(3, 4);
+			TFrac testFst(-2, 3);
+			TFrac testSnd(3, -4);
 			TFrac ResAdd = testFst / testSnd;
 			Assert::AreEqual(8.0, ResAdd.getNumer());
 			Assert::AreEqual(9.0, ResAdd.getDenom());
+		}
+
+
+		TEST_METHOD(DivZeroTest)
+		{
+			auto f = [this] {
+				TFrac testFst(-2, 3);
+				TFrac testSnd(0, -4); 
+				testFst / testSnd;
+			};
+			Assert::ExpectException<std::range_error>(f);
 		}
 
 
@@ -105,6 +140,16 @@ namespace TFracTests
 		}
 
 
+		TEST_METHOD(InverseZeroTest)
+		{
+			auto f = [this] {
+				TFrac test(0, -4);
+				test.inverse();
+			};
+			Assert::ExpectException<std::range_error>(f);
+		}
+
+
 		TEST_METHOD(UnaryMinusTest)
 		{
 			TFrac testFst(2, 3);
@@ -117,7 +162,8 @@ namespace TFracTests
 		TEST_METHOD(EqualTestTrue)
 		{
 			TFrac testFst(2, 3);
-			Assert::IsTrue(testFst == testFst);
+			TFrac testSnd(4, 6);
+			Assert::IsTrue(testFst == testSnd);
 		}
 
 

@@ -7,7 +7,7 @@ class TFrac
 public:
 	TFrac();
 	TFrac(int a, int b);
-	TFrac(std::string frac);
+	TFrac(const std::string &frac);
 	~TFrac();
 
 	static TFrac copy(TFrac c);
