@@ -5,6 +5,8 @@ VisualStudioVersion = 15.0.28010.2016
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TComplex", "TComplex\TComplex.vcxproj", "{B12F3987-0C5F-4091-B48E-9824995A4B56}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TComplexTest", "TComplexTest\TComplexTest.vcxproj", "{398A96A7-7C64-46F5-8CD9-AD992E051FFE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -21,6 +23,14 @@ Global
 		{B12F3987-0C5F-4091-B48E-9824995A4B56}.Release|x64.Build.0 = Release|x64
 		{B12F3987-0C5F-4091-B48E-9824995A4B56}.Release|x86.ActiveCfg = Release|Win32
 		{B12F3987-0C5F-4091-B48E-9824995A4B56}.Release|x86.Build.0 = Release|Win32
+		{398A96A7-7C64-46F5-8CD9-AD992E051FFE}.Debug|x64.ActiveCfg = Debug|x64
+		{398A96A7-7C64-46F5-8CD9-AD992E051FFE}.Debug|x64.Build.0 = Debug|x64
+		{398A96A7-7C64-46F5-8CD9-AD992E051FFE}.Debug|x86.ActiveCfg = Debug|Win32
+		{398A96A7-7C64-46F5-8CD9-AD992E051FFE}.Debug|x86.Build.0 = Debug|Win32
+		{398A96A7-7C64-46F5-8CD9-AD992E051FFE}.Release|x64.ActiveCfg = Release|x64
+		{398A96A7-7C64-46F5-8CD9-AD992E051FFE}.Release|x64.Build.0 = Release|x64
+		{398A96A7-7C64-46F5-8CD9-AD992E051FFE}.Release|x86.ActiveCfg = Release|Win32
+		{398A96A7-7C64-46F5-8CD9-AD992E051FFE}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
