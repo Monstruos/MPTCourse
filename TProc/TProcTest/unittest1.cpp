@@ -11,7 +11,7 @@ namespace TProcTest
 	TEST_CLASS(UnitTest1)
 	{
 	public:
-		/*
+		
 		TEST_METHOD(ConstructorAndGetters)
 		{
 			TProc<TFrac> test = TProc<TFrac>();
@@ -66,13 +66,21 @@ namespace TProcTest
 			test.Rop_Set(TFrac(1, 3));
 			test.OprtnSet(Mul);
 			test.OprtnRun();
-			Assert::IsTrue(test.Lop_Res_Get() == TFrac(3, 2));
-			Assert::IsTrue(test.Rop_Get() == TFrac(3, 4));
+			Assert::IsTrue(test.Lop_Res_Get() == TFrac(1, 6));
+			Assert::IsTrue(test.Rop_Get() == TFrac(1, 3));
 			Assert::IsTrue(test.OprtnGet() == Mul);
 
 			test.OprtnSet(Add);
 		}
 
+
+		TEST_METHOD(TestFuncRun) {
+			TProc<TFrac> test;
+			TFrac rop(3, 4);
+			test.Rop_Set(rop);
+			test.FuncRun(Rev);
+			Assert::IsTrue(test.Rop_Get() == rop.inverse());
+		}
 
 		TEST_METHOD(TestRun)
 		{
@@ -109,6 +117,6 @@ namespace TProcTest
 			Assert::IsTrue(test.Lop_Res_Get() == TFrac());
 			Assert::IsTrue(test.Rop_Get() == TFrac());
 			Assert::IsTrue(test.OprtnGet() == None);
-		}*/
+		}
 	};
 }
