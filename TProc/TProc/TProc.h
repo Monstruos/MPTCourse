@@ -20,13 +20,13 @@ public:
 	TProc() : Lop_Res(T()), Rop(T())
 	{
 		Operation = None;
-	};
+	}
 
 
 	~TProc() 
 	{
 		
-	};
+	}
 
 
 	void ReSet()
@@ -34,13 +34,12 @@ public:
 		Lop_Res = T();
 		Rop = T();
 		Operation = None;
-	};
-
+	}
 
 	void OprtnClear()
 	{
 		Operation = None;
-	};
+	}
 
 
 	void OprtnRun()
@@ -59,11 +58,8 @@ public:
 		case Dvd:
 			Lop_Res = Lop_Res / Rop;
 			break;
-		None:
-		default:
-			break;
 		}
-	};
+	}
 
 
 	void FuncRun(enum TFunc func)
@@ -78,47 +74,47 @@ public:
 		default:
 			break;
 		}
-	};
+	}
 
 
-	T Lop_Res_Get()
+	T Lop_Res_Get() const
 	{
 		return Lop_Res;
-	};
+	}
 
 
 	void Lop_Res_Set(const T & set)
 	{
 		Lop_Res = set;
-	};
+	}
 
 
 	void Rop_Set(const T & set)
 	{
 		Rop = set;
-	};
+	}
 
 
-	T Rop_Get()
+	T Rop_Get() const
 	{
 		return Rop;
-	};
+	}
 
 
-	enum TOprtn OprtnGet()
+	TOprtn OprtnGet() const
 	{
 		return Operation;
-	};
+	}
 
 
-	void OprtnSet(enum TOprtn set)
+	void OprtnSet(TOprtn set)
 	{
 		Operation = set;
-	};
+	}
 
 private:
 	T Lop_Res;
 	T Rop;
-	enum TOprtn Operation;
+	TOprtn Operation;
 };
 

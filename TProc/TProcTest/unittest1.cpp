@@ -69,8 +69,6 @@ namespace TProcTest
 			Assert::IsTrue(test.Lop_Res_Get() == TFrac(1, 6));
 			Assert::IsTrue(test.Rop_Get() == TFrac(1, 3));
 			Assert::IsTrue(test.OprtnGet() == Mul);
-
-			test.OprtnSet(Add);
 		}
 
 
