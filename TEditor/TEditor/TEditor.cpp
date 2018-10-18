@@ -1,8 +1,8 @@
 #include "stdafx.h"
 #include "TEditor.h"
 
-const std::string ZERO = "0";
-const char DIV_SIGN = '.';
+const std::string TEditor::ZERO = "0";
+const char TEditor::DIV_SIGN = '.';
 
 TEditor::TEditor() : number("0"), base(10)
 {
@@ -13,10 +13,12 @@ TEditor::~TEditor()
 {
 }
 
+
 bool TEditor::isZero()
 {
 	return TPNumber(number, std::to_string(base)).getNumber() == 0.0;
 }
+
 
 std::string TEditor::changeSign()
 {
@@ -26,16 +28,18 @@ std::string TEditor::changeSign()
 	}
 	else
 	{
-		number = "-" + number;
+		if(number != TEditor::ZERO)
+			number = "-" + number;
 	}
 	return number;
 }
+
 
 std::string TEditor::addDigit(unsigned int digit)
 {
 	if (digit < base)
 	{
-		if (isZero())
+		if (number == TEditor::ZERO)
 		{
 			number = "";
 		}
@@ -44,16 +48,23 @@ std::string TEditor::addDigit(unsigned int digit)
 	return number;
 }
 
+
 std::string TEditor::addZero()
 {
 	return addDigit(0);
 }
 
+
 std::string TEditor::backspace()
 {
 	number.pop_back();
+	if (number == "-" || number == "")
+	{
+		number = TEditor::ZERO;
+	}
 	return number;
 }
+
 
 std::string TEditor::clear()
 {
@@ -61,13 +72,24 @@ std::string TEditor::clear()
 	return number;
 }
 
+std::string TEditor::addSplit()
+{
+	if (number.find(DIV_SIGN) == std::string::npos)
+	{
+		number = number + DIV_SIGN;
+	}
+	return number;
+}
+
+
 void TEditor::setNumber(std::string & num)
 {
-	number = num;
+	number = TPNumber(num, std::to_string(base)).getNumberAsString();
 }
+
 
 std::string TEditor::getNumber() const
 {
-	return number;
+	return TPNumber(number, std::to_string(base)).getNumberAsString();
 }
 

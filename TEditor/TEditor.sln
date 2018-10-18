@@ -7,6 +7,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TEditor", "TEditor\TEditor.
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TPNumber", "..\TPNumber\TPNumber\TPNumber.vcxproj", "{054CD22F-C08F-46F4-A03F-A46FB6EC9C86}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TEditorTest", "TEditorTest\TEditorTest.vcxproj", "{3FF6A3EF-1804-4231-A0BB-A359B45DDACB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -31,6 +33,14 @@ Global
 		{054CD22F-C08F-46F4-A03F-A46FB6EC9C86}.Release|x64.Build.0 = Release|x64
 		{054CD22F-C08F-46F4-A03F-A46FB6EC9C86}.Release|x86.ActiveCfg = Release|Win32
 		{054CD22F-C08F-46F4-A03F-A46FB6EC9C86}.Release|x86.Build.0 = Release|Win32
+		{3FF6A3EF-1804-4231-A0BB-A359B45DDACB}.Debug|x64.ActiveCfg = Debug|x64
+		{3FF6A3EF-1804-4231-A0BB-A359B45DDACB}.Debug|x64.Build.0 = Debug|x64
+		{3FF6A3EF-1804-4231-A0BB-A359B45DDACB}.Debug|x86.ActiveCfg = Debug|Win32
+		{3FF6A3EF-1804-4231-A0BB-A359B45DDACB}.Debug|x86.Build.0 = Debug|Win32
+		{3FF6A3EF-1804-4231-A0BB-A359B45DDACB}.Release|x64.ActiveCfg = Release|x64
+		{3FF6A3EF-1804-4231-A0BB-A359B45DDACB}.Release|x64.Build.0 = Release|x64
+		{3FF6A3EF-1804-4231-A0BB-A359B45DDACB}.Release|x86.ActiveCfg = Release|Win32
+		{3FF6A3EF-1804-4231-A0BB-A359B45DDACB}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

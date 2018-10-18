@@ -14,6 +14,7 @@ public:
 	std::string addZero();
 	std::string backspace();
 	std::string clear();
+	std::string addSplit();
 	void setNumber(std::string & num);
 	std::string getNumber() const;
 	static const std::string ZERO;
