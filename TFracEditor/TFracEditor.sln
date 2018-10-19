@@ -1,0 +1,51 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28010.2016
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TFracEditor", "TFracEditor\TFracEditor.vcxproj", "{01027B0D-593A-47E0-8FFF-93DBB5A71177}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TFrac", "..\TFrac\TFrac\TFrac.vcxproj", "{2AA04A9F-B39A-4D2F-B4E0-79CC3F5F4E2C}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TFracEditorTest", "TFracEditorTest\TFracEditorTest.vcxproj", "{3E6258EF-341C-41C4-BF1C-697BF1021E8A}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x64 = Debug|x64
+		Debug|x86 = Debug|x86
+		Release|x64 = Release|x64
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{01027B0D-593A-47E0-8FFF-93DBB5A71177}.Debug|x64.ActiveCfg = Debug|x64
+		{01027B0D-593A-47E0-8FFF-93DBB5A71177}.Debug|x64.Build.0 = Debug|x64
+		{01027B0D-593A-47E0-8FFF-93DBB5A71177}.Debug|x86.ActiveCfg = Debug|Win32
+		{01027B0D-593A-47E0-8FFF-93DBB5A71177}.Debug|x86.Build.0 = Debug|Win32
+		{01027B0D-593A-47E0-8FFF-93DBB5A71177}.Release|x64.ActiveCfg = Release|x64
+		{01027B0D-593A-47E0-8FFF-93DBB5A71177}.Release|x64.Build.0 = Release|x64
+		{01027B0D-593A-47E0-8FFF-93DBB5A71177}.Release|x86.ActiveCfg = Release|Win32
+		{01027B0D-593A-47E0-8FFF-93DBB5A71177}.Release|x86.Build.0 = Release|Win32
+		{2AA04A9F-B39A-4D2F-B4E0-79CC3F5F4E2C}.Debug|x64.ActiveCfg = Debug|x64
+		{2AA04A9F-B39A-4D2F-B4E0-79CC3F5F4E2C}.Debug|x64.Build.0 = Debug|x64
+		{2AA04A9F-B39A-4D2F-B4E0-79CC3F5F4E2C}.Debug|x86.ActiveCfg = Debug|Win32
+		{2AA04A9F-B39A-4D2F-B4E0-79CC3F5F4E2C}.Debug|x86.Build.0 = Debug|Win32
+		{2AA04A9F-B39A-4D2F-B4E0-79CC3F5F4E2C}.Release|x64.ActiveCfg = Release|x64
+		{2AA04A9F-B39A-4D2F-B4E0-79CC3F5F4E2C}.Release|x64.Build.0 = Release|x64
+		{2AA04A9F-B39A-4D2F-B4E0-79CC3F5F4E2C}.Release|x86.ActiveCfg = Release|Win32
+		{2AA04A9F-B39A-4D2F-B4E0-79CC3F5F4E2C}.Release|x86.Build.0 = Release|Win32
+		{3E6258EF-341C-41C4-BF1C-697BF1021E8A}.Debug|x64.ActiveCfg = Debug|x64
+		{3E6258EF-341C-41C4-BF1C-697BF1021E8A}.Debug|x64.Build.0 = Debug|x64
+		{3E6258EF-341C-41C4-BF1C-697BF1021E8A}.Debug|x86.ActiveCfg = Debug|Win32
+		{3E6258EF-341C-41C4-BF1C-697BF1021E8A}.Debug|x86.Build.0 = Debug|Win32
+		{3E6258EF-341C-41C4-BF1C-697BF1021E8A}.Release|x64.ActiveCfg = Release|x64
+		{3E6258EF-341C-41C4-BF1C-697BF1021E8A}.Release|x64.Build.0 = Release|x64
+		{3E6258EF-341C-41C4-BF1C-697BF1021E8A}.Release|x86.ActiveCfg = Release|Win32
+		{3E6258EF-341C-41C4-BF1C-697BF1021E8A}.Release|x86.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {37A86587-84B8-4054-882D-55699809A1B5}
+	EndGlobalSection
+EndGlobal

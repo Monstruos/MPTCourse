@@ -5,11 +5,11 @@
 
 class TPNumber {
 public:
-	explicit TPNumber(double number = 0.0, int base = 10, int precision = 7);
+	explicit TPNumber(double number = 0, int base = 10, int precision = 2);
 
-	TPNumber(const std::string &number, const std::string &base = "10", const std::string &precision = "7");
+	explicit TPNumber(const std::string &number, const std::string &base = "10", const std::string &precision = "2");
 
-	TPNumber copy();
+	TPNumber& operator=(const TPNumber &sec);
 
 	TPNumber operator+(const TPNumber& sec);
 
@@ -26,8 +26,6 @@ public:
 	double getNumber();
 
 	std::string getNumberAsString();
-
-	std::string getNumberAsStringWithoutZero();
 
 	int getBase();
 
