@@ -1,30 +1,75 @@
-#pragma once
+#include "stdafx.h"
 
+#ifndef MODERNPROGRAMMING_TPOLY_H
+#define MODERNPROGRAMMING_TPOLY_H
+
+#include <string>
 #include <list>
-#include "TMember.h"
 
-class TPoly
-{
+class TPoly {
 public:
-	TPoly();
-	TPoly(int k, int n);
-	~TPoly();
+	class TMember {
+	public:
+		explicit TMember(int k = 0, int n = 0);
+
+		int getExp() const;
+
+		int getFactor() const;
+
+		void setExp(int n);
+
+		void setFactor(int k);
+
+		bool operator==(const TMember &sec);
+
+		TMember differentiate();
+
+		double calculate(double a);
+
+		std::string toString();
+
+	private:
+		int fact;
+		int exp;
+	};
+
+	explicit TPoly(int k = 0, int n = 0);
+
 	int getExp();
+
 	int getFactor(int exp);
+
 	void clear();
-	friend TPoly & operator+(TPoly & fst, TMember & elem);
-	friend TPoly & operator+(TPoly & fst, TPoly & sec);
-	friend TPoly & operator-(TPoly & fst, TMember & elem);
-	friend TPoly & operator-(TPoly & fst, TPoly & sec);
-	friend TPoly & operator*(TPoly & fst, TMember & elem);
-	friend TPoly & operator*(TPoly & fst, TPoly & sec);
-	friend TPoly & operator-(TPoly & fst);
-	friend bool operator==(TPoly & fst, TPoly & sec);
+
+	TPoly operator+(const TMember &elem);
+
+	TPoly operator+(const TPoly &sec);
+
+	TPoly operator-(const TMember &elem);
+
+	TPoly operator-(const TPoly &sec);
+
+	TPoly operator*(const TMember &elem);
+
+	TPoly operator*(const TPoly &sec);
+
+	TPoly operator-();
+
+	bool operator==(const TPoly &sec);
+
 	TPoly differentiate();
+
 	double calculate(double a);
-	TMember & elemAt(int i);
+
+	TMember &elemAt(int idx);
+
 private:
 	std::list<TMember> polynom;
+
 	void removeDead();
+
+	TPoly &operator=(const TPoly &sec) = default;
 };
 
+
+#endif //MODERNPROGRAMMING_TPOLY_H

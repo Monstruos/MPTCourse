@@ -1,196 +1,199 @@
 #include "stdafx.h"
+#include <cmath>
 #include "TPoly.h"
-#include <list>
-
-typedef std::list<TMember>::iterator ltmi;
 
 
-TPoly::TPoly()
-{
-	polynom.push_front(TMember(0, 0));
+TPoly::TPoly(int k, int n) {
+	polynom.emplace_back(k, n);
 }
 
-TPoly::TPoly(int k, int n)
-{
-	polynom.push_front(TMember(k, n));
-}
-
-TPoly::~TPoly()
-{
-}
-
-int TPoly::getExp()
-{
+int TPoly::getExp() {
 	return polynom.begin()->getExp();
 }
 
-int TPoly::getFactor(int exp)
-{
-	for (ltmi i = this->polynom.begin(); i != polynom.end(); i++)
-	{
-		int bufExp = i->getExp();
-		if (bufExp == exp)
-		{
-			return i->getFactor();
+int TPoly::getFactor(int exp) {
+	for (auto mem : polynom) {
+		if (mem.getExp() == exp) {
+			return mem.getFactor();
 		}
 	}
 	return 0;
 }
 
-void TPoly::clear()
-{
+void TPoly::clear() {
 	polynom.clear();
-	polynom.push_back(TMember(0, 0));
+	polynom.emplace_back(0, 0);
 }
 
-TPoly & operator+(TPoly & fst, TMember & elem)
-{
-	TPoly res = fst;
-	/*for (ltmi i = res.polynom.begin(); i != res.polynom.end(); i++)
-	{
-		int bufExp = i->getExp();
-		if (bufExp == elem.getExp())
-		{
-			//i->setFactor(i->getFactor() + elem.getFactor());
-			//res.removeDead();
+TPoly TPoly::operator+(const TMember &elem) {
+	TPoly res = *this;
+
+	res.polynom.remove(TMember(0, 0));
+
+	for (auto it = res.polynom.begin(); it != res.polynom.end(); ++it) {
+		int memExp = it->getExp();
+		int elemExp = elem.getExp();
+		if (memExp == elemExp) {
+			it->setFactor(it->getFactor() + elem.getFactor());
+			res.removeDead();
 			return res;
 		}
-		else
-		{
-			if (elem.getExp() > bufExp)
-			{
+		else {
+			if (elemExp > memExp) {
 				TMember buf = elem;
-				//res.polynom.insert(i, buf);
+				res.polynom.insert(it, buf);
 				return res;
 			}
 		}
-	}*/
-	return res;
-}
-
-TPoly & operator+(TPoly & fst, TPoly & sec)
-{
-	TPoly res;
-	for (ltmi i = sec.polynom.begin(); i != sec.polynom.end(); i++)
-	{
-		res = fst + *i;
 	}
+
+	res.polynom.push_back(elem);
+
 	return res;
 }
 
-TPoly & operator-(TPoly & fst, TMember & elem)
-{
-	TMember buf(-(elem.getFactor()), elem.getExp());
-	return fst + buf;
-}
+TPoly TPoly::operator+(const TPoly &sec) {
+	TPoly res = *this;
 
-TPoly & operator-(TPoly & fst, TPoly & sec)
-{
-	TPoly res;
-	for (ltmi i = sec.polynom.begin(); i != sec.polynom.end(); i++)
-	{
-		TMember buf(-(i->getFactor()), i->getExp());
-		res = fst + buf;
+	for (auto mem : sec.polynom) {
+		res = res + mem;
 	}
+
 	return res;
 }
 
-TPoly & operator*(TPoly & fst, TMember & elem)
-{
-	TPoly res;
-	for (ltmi i = fst.polynom.begin(); i != fst.polynom.end(); i++)
-	{
-		TMember buf(i->getFactor() * elem.getFactor(),
-			i->getExp() + elem.getExp());
-		res = res + buf;
+TPoly TPoly::operator-(const TMember &elem) {
+	return *this + TMember(-elem.getFactor(), elem.getExp());
+}
+
+TPoly TPoly::operator-(const TPoly &sec) {
+	TPoly res = *this;
+
+	for (auto mem : sec.polynom) {
+		res = res - mem;
 	}
+
 	return res;
 }
 
-TPoly & operator*(TPoly & fst, TPoly & sec)
-{
+TPoly TPoly::operator*(const TMember &elem) {
 	TPoly res;
-	for (ltmi i = sec.polynom.begin(); i != sec.polynom.end(); i++)
-	{
-		res = res + (fst * (*i));
+
+	for (auto mem : polynom) {
+		res = res + TMember(mem.getFactor() * elem.getFactor(), mem.getExp() + elem.getExp());
 	}
+
 	return res;
 }
 
-TPoly & operator-(TPoly & fst)
-{
-	TMember a(-1, 0);
-	TPoly res = fst * a;
-	return res;
-}
+TPoly TPoly::operator*(const TPoly &sec) {
+	TPoly res;
 
-bool operator==(TPoly & fst, TPoly & sec)
-{
-	for (ltmi i = fst.polynom.begin(); i != fst.polynom.end(); i++)
-	{
-		for (ltmi j = sec.polynom.begin(); j != sec.polynom.end(); j++)
-		{
-			if (*i == *j)
-			{
-				// Still think that it's evil;
-				goto next;
-			}
+	for (auto mem : polynom) {
+		for (auto secMem : sec.polynom) {
+			res = res + TMember(mem.getFactor() * secMem.getFactor(), mem.getExp() + secMem.getExp());
 		}
-		return false;
-	next:;
 	}
+
+	return res;
+}
+
+TPoly TPoly::operator-() {
+	TPoly zero(0, 0);
+	return zero - *this;
+}
+
+bool TPoly::operator==(const TPoly &sec) {
+	auto size = polynom.size();
+	if (size != sec.polynom.size()) {
+		return false;
+	}
+
+	auto secMem = sec.polynom.begin();
+	for (auto mem : polynom) {
+		if (!(mem == *secMem)) {
+			return false;
+		}
+	}
+
 	return true;
 }
 
-TPoly TPoly::differentiate()
-{
+TPoly TPoly::differentiate() {
 	TPoly res;
-	for (ltmi i = polynom.begin(); i != polynom.end(); i++)
-	{
-		TMember diff = i->differentiate();
-		if (!(diff == TMember(0, 0)))
-		{
-			res = res + diff;
+
+	for (auto mem : polynom) {
+		if (mem.getExp()) {
+			res = res + mem.differentiate();
 		}
 	}
+
 	return res;
 }
 
-double TPoly::calculate(double a)
-{
+double TPoly::calculate(double a) {
 	double res = 0.0;
-	for (ltmi i = polynom.begin(); i != polynom.end(); i++)
-	{
-		res += i->calculate(a);
+
+	for (auto i : polynom) {
+		res += i.calculate(a);
 	}
+
 	return res;
 }
 
-TMember & TPoly::elemAt(int i)
-{
-	for (ltmi it = polynom.begin(); it != polynom.end(); it++)
-	{
-		if (it->getExp() == i)
-		{
-			return *it;
-		}
+TPoly::TMember &TPoly::elemAt(int idx) {
+	auto mem = polynom.begin();
+	for (int i = 0; i < idx; ++i) {
+		mem++;
 	}
-	TMember res(0, i);
-	return res;
+	return *mem;
 }
 
-void TPoly::removeDead()
-{
-	ltmi prev;
-	ltmi i = polynom.begin();
-	prev = i;
-	for (i++; i != polynom.end(); i++)
-	{
-		if (i->getFactor() == 0)
-		{
-			polynom.remove(*i);
-			i = prev;
+void TPoly::removeDead() {
+	for (auto it = polynom.begin(), next = it; it != polynom.end(); it = next) {
+		if (it->getFactor() == 0) {
+			polynom.remove(*it);
 		}
-		prev = i;
+		next++;
 	}
+
+	if (polynom.empty()) {
+		polynom.emplace_back(0, 0);
+	}
+}
+
+TPoly::TMember::TMember(int k, int n) : fact(k), exp(n) {
+
+}
+
+int TPoly::TMember::getExp() const {
+	return exp;
+}
+
+int TPoly::TMember::getFactor() const {
+	return fact;
+}
+
+void TPoly::TMember::setExp(int n) {
+	exp = n;
+}
+
+void TPoly::TMember::setFactor(int k) {
+	fact = k;
+}
+
+bool TPoly::TMember::operator==(const TMember &sec) {
+	return fact == sec.fact && exp == sec.exp;
+}
+
+TPoly::TMember TPoly::TMember::differentiate() {
+	return TMember(fact * exp, exp - 1);
+}
+
+double TPoly::TMember::calculate(double a) {
+	return pow(a, exp) * fact;
+}
+
+std::string TPoly::TMember::toString() {
+	return std::to_string(fact) + "*x^" + std::to_string(exp);
 }
