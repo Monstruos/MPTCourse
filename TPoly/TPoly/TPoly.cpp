@@ -34,8 +34,15 @@ TPoly TPoly::operator+(const TMember &elem) {
 		int memExp = it->getExp();
 		int elemExp = elem.getExp();
 		if (memExp == elemExp) {
-			it->setFactor(it->getFactor() + elem.getFactor());
-			res.removeDead();
+			int buf = it->getFactor() + elem.getFactor();
+			if (buf != 0)
+			{
+				it->setFactor(buf);
+			}
+			else
+			{
+				res.polynom.remove(*it);
+			}
 			return res;
 		}
 		else {
@@ -54,16 +61,36 @@ TPoly TPoly::operator+(const TMember &elem) {
 
 TPoly TPoly::operator+(const TPoly &sec) {
 	TPoly res = *this;
-
-	for (auto mem : sec.polynom) {
-		res = res + mem;
+	auto itFst = res.polynom.begin();
+	auto itSnd = sec.polynom.begin();
+	for (; itFst != res.polynom.end(); ++itFst) {
+		// insert all elems from snd list that should place before (fst->exp)
+		while (itSnd->getExp() > itFst->getExp() && itSnd != sec.polynom.end())
+		{
+			res.polynom.insert(itFst, *itSnd);
+			++itSnd;
+		}
+		if (itSnd->getExp() == itFst->getExp())
+		{
+			res.polynom.insert(itFst, TMember(itFst->getFactor() + itSnd->getFactor(),
+				itFst->getExp()));
+			++itSnd;
+		}
+	}
+	// if fst list is ended, but second still have mononoms
+	// for example:
+	// fst: x^4 + x^3
+	// snd: x^2 + x^1
+	if (itSnd != sec.polynom.end())
+	{
+		res.polynom.insert(itFst, itSnd, sec.polynom.end());
 	}
 
 	return res;
 }
 
 TPoly TPoly::operator-(const TMember &elem) {
-	return *this + TMember(-elem.getFactor(), elem.getExp());
+	return *this + TMember(-1 * elem.getFactor(), elem.getExp());
 }
 
 TPoly TPoly::operator-(const TPoly &sec) {
