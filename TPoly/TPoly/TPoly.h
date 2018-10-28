@@ -6,9 +6,11 @@
 #include <string>
 #include <list>
 
-class TPoly {
+class TPoly
+{
 public:
-	class TMember {
+	class TMember
+	{
 	public:
 		explicit TMember(int k = 0, int n = 0);
 
@@ -63,12 +65,10 @@ public:
 
 	TMember &elemAt(int idx);
 
+	TPoly &operator=(const TPoly &sec) = default;
+
 private:
 	std::list<TMember> polynom;
-
-	void removeDead();
-
-	TPoly &operator=(const TPoly &sec) = default;
 };
 
 
